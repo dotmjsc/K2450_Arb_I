@@ -147,7 +147,7 @@ The **Autodelay values** (as found in the Reference Manual) are:
 
 ![](doc/Meas_Settings.PNG)
 
-* **4 Wire** enables 4-Wire measurement. When the cable resistance matters, this is the preferred settings. See the image on the bottom of the program how to connect.
+* **4 Wire** enables 4-Wire measurement. When the cable resistance matters, enable this setting. See the image on the bottom of the program how to connect.
 
 * **Range** set the measurement range according to your DUT (device under test). You can use **Auto** for autoranging, but this is very slow, be warned!
 
