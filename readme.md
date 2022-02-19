@@ -161,7 +161,8 @@ The **Autodelay values** (as found in the Reference Manual) are:
 
 * **Beep** makes beeps on the SMU for start/end/error indication. Try this, it is really nice :)
 
-* **Assure Timing** If the desired timestep is smaller than the calculated timestep, the run is aborted. Why do I need this? Let's assume you want to have a rather short timestep, for instance 2ms with a PWL file of 1s runtime, and you accidentally set NPLC to 10. Without "Assure Timing" it would run 100 seconds (you'll get a warning though). If "Assure Timing" set you rather get an error and the sequence will not run:
+* **Assure Timing** If the desired timestep is smaller than the calculated timestep, the run is aborted. Why do I need this? Let's assume you want to have a rather short timestep, for instance 2ms with a PWL file of 1s runtime, and you accidentally set NPLC to 10. Without "Assure Timing" it would run 100 seconds (you'll get a warning though). With "Assure Timing" you rather get an error and the sequence will not run:
+
   ![](doc/Assure_Error.PNG)
 
 * **Steppy Plot** with this, the current plot in the results will not be interpolated. This helps finding problematic timestep settings where a smooth waveform can't be sourced. See this example:
