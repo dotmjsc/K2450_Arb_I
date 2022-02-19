@@ -300,6 +300,6 @@ def _beep_end_ok(self):
 
 The GUI is created with the [PAGE GUI creator](http://page.sourceforge.net/).
 
-## license
+## License
 GNU General Public License v3.0 - See COPYING.txt
 
