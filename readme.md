@@ -34,7 +34,7 @@ The 4-wire fixture can be bought [here](https://www.aliexpress.com/item/40006064
 
 ### Windows
 
-Just get the latest windows binaries from [Here](https://github.com). Additionally, you need a working VISA installation. I recommend Keysight VISA.
+Just get the latest windows binaries from [Here](https://github.com/dotmarkus/K2450_Arb_I/releases). Additionally, you need a working VISA installation. I recommend Keysight VISA.
 
 The binaries are made with PyInstaller. 
 
