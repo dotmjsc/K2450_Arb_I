@@ -73,17 +73,17 @@ You can connect to your SMU via USB, GPIB or LAN. You should however make sure t
 
 Menu -> System -> Settings:
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\SMU_settings.PNG)
+![](doc/SMU_settings.PNG)
 
 ## Using the Software
 
 After startup, you'll be greeted with a nice graphical user interface (Here shown in usage):
 
-<img src="file:///E:/projekte%20privat/Batterieemulator/SMU_Loadtest/Dokumentation/GUI.png" title="" alt="GUI" width="707">
+![](doc/GUI.png)
 
 ### Visa Instrument Selection
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\VISA_Selection.PNG)
+![](doc/VISA_Selection.PNG)
 
 On startup the program automatically scans for available visa devices into the select box.
 
@@ -93,7 +93,7 @@ On startup the program automatically scans for available visa devices into the s
 
 ### File Selection
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\File_Selection.PNG)
+![](doc/File_Selection.PNG)
 
 * **Choose** opens a file dialog where you can choose your LT-Spice "piecewise linear" (PWL) file. 
 
@@ -105,7 +105,7 @@ On startup the program automatically scans for available visa devices into the s
 
 After the PWL file is chosen or reloaded, the plot window shows the PWL waveform and the discrete steps (in red) based on the Timestep setting. Here shown with a rather long Timestep of 30ms:
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\PWL_discrete.PNG)
+![](doc/PWL_discrete.PNG)
 
 **Data Length:** The maximum allowed number of load data points to be loaded into the SMU is 299995 (limitation of the device). You can control the number of points in the info window. If the number of points exceed this, the data will be truncated and a warning is displayed:
 
@@ -113,7 +113,7 @@ After the PWL file is chosen or reloaded, the plot window shows the PWL waveform
 
 ### Source Settings
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\Source_Config.PNG)
+![](doc/Source_Config.PNG)
 
 * **Autozero** helps to avoid drifts in long runs. As a penalty the measuring time will get longer. For fast runs with small time steps, disable autozero. The program will manually zero once before the run.
 
@@ -145,7 +145,7 @@ The **Autodelay values** (as found in the Reference Manual) are:
 
 ### Measurement Settings
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\Meas_Settings.PNG)
+![](doc/Meas_Settings.PNG)
 
 * **4 Wire** enables 4-Wire measurement. When the cable resistance matters, this is the preferred settings. See the image on the bottom of the program how to connect.
 
@@ -157,15 +157,15 @@ The **Autodelay values** (as found in the Reference Manual) are:
 
 ### Miscellaneous settings and Buttons
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\Misc_Buttons.PNG)
+![](doc/Misc_Buttons.PNG)
 
 * **Beep** makes beeps on the SMU for start/end/error indication. Try this, it is really nice :)
 
 * **Assure Timing** If the desired timestep is smaller than the calculated timestep, the run is aborted. Why do I need this? Let's assume you want to have a rather short timestep, for instance 2ms with a PWL file of 1s runtime, and you accidentally set NPLC to 10. Without "Assure Timing" it would run 100 seconds (you'll get a warning though). If "Assure Timing" set you rather get an error and the sequence will not run:
-  ![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\Assure_Error.PNG)
+  ![](doc/Assure_Error.PNG)
 
 * **Steppy Plot** with this, the current plot in the results will not be interpolated. This helps finding problematic timestep settings where a smooth waveform can't be sourced. See this example:
-  ![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\Steppy_Plot.png)
+  ![](doc/Steppy_Plot.png)
 
 * **Load Config** opens a file dialog where you can load a config file. Its a standard .ini file that you can write yourself. Look at default.ini for the key names. Fallback is the  actual config, so a subset is also permitted.
 
@@ -245,17 +245,17 @@ A measure configuration list named "MEAS_LIST" hold only a single item with the 
 
 A trigger timer is set up that starts with a notification stimulus from a trigger block. The Delay is set to the Timestep value (here: 2.5 ms). 
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\Trigger_Timer.PNG)
+![](doc/Trigger_Timer.PNG)
 
 For normal operation a trigger model is created like below:
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\Model_normal.png)
+![](doc/Model_normal.png)
 
 At first the source is turned on and set to 0A (first configuration list element). The timer is started with a stimulus from block 5. Then on each timer event a new data point from the config list is loaded. Block 9 branches to block 6 unless all the data points have been loaded. Then a last data point with a value of 0A is loaded and held for 0.5s. Finally the source is turned off the model branches to idle state.
 
 For operation with UVLO detection, the model is a little more complex:
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\Model_Uvlo.png)
+![](doc/Model_Uvlo.png)
 
 New is block 9 that compares the last voltage measurement to a constant limit (the UVLO value). If the measurement is lower, it branches to block 15. Block 15 can only be reached by block 9 (because block 14 always branches). It displays a UVLO warning log message on the display then block 16 branches to block 13 where the source is immediately turned off.
 
