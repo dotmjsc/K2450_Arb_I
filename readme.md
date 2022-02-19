@@ -6,7 +6,7 @@ This is a arbitrary controlled current source for a Keithley 2450 Source Measure
 
 * Sources current and measures voltage
 
-* The waveform is from with a LT-Spice compatible PWL text file, so you can compare your results with your simulation
+* The waveform is loaded from a LT-Spice compatible PWL text file, so you can compare your results with your simulation
 
 * Timing is accurately done by the SMU internally
 
