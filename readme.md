@@ -24,7 +24,7 @@ This is a arbitrary controlled current source for a Keithley 2450 Source Measure
 
 * Nice beep sounds (optional)
 
-![](E:\projekte%20privat\Batterieemulator\SMU_Loadtest\Dokumentation\Example.png)
+![](doc/Example.png)
 
 The example above is using this software to run pulsed load currents on an alkaline battery to compare with simulation results. 
 
