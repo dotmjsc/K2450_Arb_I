@@ -97,7 +97,7 @@ On startup the program automatically scans for available visa devices into the s
 
 * **Choose** opens a file dialog where you can choose your LT-Spice "piecewise linear" (PWL) file. 
 
-* **Timestep** since the PWL file is a list of neuralgic data points, the program needs to interpolate to make a evenly spaced list of sample points for the current source. You'll basically control the sample rate with this.
+* **Timestep** since the PWL file is a list of neuralgic data points, the program needs at first to interpolate then make a evenly spaced list of sample points for the current source. You'll basically control the sample rate with this.
 
 * **Invert** you can invert the signs of all currents in the PWL file by setting this. Be aware that the K2450 will only act as load (when connected as in the picture at the bottom) when the currents have a negative sign!
 
