@@ -97,7 +97,7 @@ On startup the program automatically scans for available visa devices into the s
 
 * **Choose** opens a file dialog where you can choose your LT-Spice "piecewise linear" (PWL) file. 
 
-* **Timestep** since the PWL file is a list of neuralgic data points, the program needs at first to interpolate then make a evenly spaced list of sample points for the current source. You'll basically control the sample rate with this.
+* **Timestep** since the PWL file is a list of neuralgic data points, the program needs first to interpolate then to make a evenly spaced list of sample points for the current source. You'll basically control the sample rate with this.
 
 * **Invert** you can invert the signs of all currents in the PWL file by setting this. Be aware that the K2450 will only act as load (when connected as in the picture at the bottom) when the currents have a negative sign!
 
@@ -117,7 +117,7 @@ After the PWL file is chosen or reloaded, the plot window shows the PWL waveform
 
 * **Autozero** helps to avoid drifts in long runs. As a penalty the measuring time will get longer. For fast runs with small time steps, disable autozero. The program will manually zero once before the run.
 
-* **Range** sets the current range. Be aware that the different ranges got different Autodelay values (see below). If you choose **Auto**, the best range will be calculated from PWL data. If you got small currents but you don't want the high Autodelays, you can either manually set a higher range or a manual delay.
+* **Range** sets the current range. Be aware that the different ranges got different Autodelay values (see below). If you choose **Auto**, the best range will be calculated from PWL data. If you have to source very small currents but you don't want high Autodelays, you can either manually set a higher range or set a manual delay.
 
 * **Autodelay** the SMU will choose a delay according to the list below
 
@@ -153,7 +153,7 @@ The **Autodelay values** (as found in the Reference Manual) are:
 
 * **NPLC** (Number of Power Line Cycles) this is essentially a averaging setting. The higher the less noise you will see on the measurements. One powerline cycle is 1/(line frequency). In European countries it is 20ms. The lowest setting is 0.01 - 200µs. If you choose **Auto** the program will determine the highest possible NPLC setting in respect to the total calculated source delay and the time step. I recommend this!
 
-* **Initial Delay** is the time the SMU actively sources 0 (Zero) Amperes after it went from HIGH-Z to ON. Running the sequence starts afterwards. This is helpful to avoid measuring the tiny current spike that happens then. If your DUT is a electrochemical cell with a high ESR, better use a high setting here.
+* **Initial Delay** is the time the SMU actively sources 0 (Zero) Amperes after it went from HIGH-Z to ON. Running the sequence starts afterwards. This is helpful to avoid measuring the current spike that happens when the internal relay switches. Better use a high setting here if your DUT is a electrochemical cell with a high ESR.
 
 ### Miscellaneous settings and Buttons
 
@@ -161,14 +161,14 @@ The **Autodelay values** (as found in the Reference Manual) are:
 
 * **Beep** makes beeps on the SMU for start/end/error indication. Try this, it is really nice :)
 
-* **Assure Timing** If the desired timestep is smaller than the calculated timestep, the run is aborted. Why do I need this? Let's assume you want to have a rather short timestep, for instance 2ms with a PWL file of 1s runtime, and you accidentally set NPLC to 10. Without "Assure Timing" it would run 100 seconds (you'll get a warning though). With "Assure Timing" you rather get an error and the sequence will not run:
+* **Assure Timing** If the desired timestep is smaller than the calculated timestep, the run is aborted. Why would you need this? Let's assume you want to have a rather short timestep, for instance 2ms with a PWL file of 1s runtime, and you accidentally set NPLC to 10. Without "Assure Timing" it would run 100 seconds (you'll get a warning though). With "Assure Timing" you rather get an error and the sequence will not run:
 
   ![](doc/Assure_Error.PNG)
 
 * **Steppy Plot** by setting this, the current results will be plotted without interpolation. This helps finding problematic timestep settings where a smooth waveform can't be sourced. See this example:
   ![](doc/Steppy_Plot.png)
 
-* **Load Config** opens a file dialog where you can load a config file. Its a standard .ini file that you can write yourself. Look at default.ini for the key names. Fallback is the  actual config, so a subset is also permitted.
+* **Load Config** opens a file dialog where you can load a config file. Its a standard .ini file that you can write yourself. Look at default.ini for the key names. Fallback is the present configuration, so a subset is also permitted.
 
 * **Save Config** lets you save the complete settings to a file
 
@@ -180,7 +180,7 @@ The **Autodelay values** (as found in the Reference Manual) are:
 
 * **RUN** run the sequence if a valid PWL file is loaded and the SMU is ready
 
-* **Simulate** loads the trigger model and the data points into the SMU, but does not run it. You can use this to check for errors,  for example by checking *Assure timing* and watching the log text. You should also take a look at the display of the SMU for further errors.
+* **Simulate** loads the trigger model and the data points into the SMU, but does not run it. You can use this to check for errors, for example by checking *Assure timing* and watching the log text. You should also take a look at the display of the SMU for further errors.
 
 ## Use without GUI
 
@@ -240,11 +240,11 @@ del K2450_SL
 
 ### SMU Timer and Trigger Model
 
-For n data points the program will make a source configuration list called "SOURCE LIST"  with n+2 points. The first point will hold the general settings and the source level is set to 0A. The last element is set to 0A as well.
+For n data points the program will make a source configuration list called "SOURCE LIST" with n+2 points. The first point will hold the general settings and the source level is set to 0A. The last element is set to 0A as well.
 
-A measure configuration list named "MEAS_LIST" hold only a single item with the measurement settings.
+A measure configuration list named "MEAS_LIST" holds only a single item with the all measurement settings.
 
-A trigger timer is set up that starts with a notification stimulus from a trigger block. The Delay is set to the Timestep value (here: 2.5 ms). 
+A trigger timer is prepared. The timer starts with a notification stimulus from a trigger block. The delay of the timer is set to the Timestep value (here: 2.5 ms). 
 
 ![](doc/Trigger_Timer.PNG)
 
@@ -252,7 +252,7 @@ For normal operation a trigger model is created like below:
 
 ![](doc/Model_normal.png)
 
-At first the source is turned on and set to 0A (first configuration list element). The timer is started with a stimulus from block 5. Then on each timer event a new data point from the config list is loaded. Block 9 branches to block 6 unless all the data points have been loaded. Then a last data point with a value of 0A is loaded and held for 0.5s. Finally the source is turned off the model branches to idle state.
+At first the source is turned on and set to 0A (first configuration list element). The first delay block waits for the initial settling time to elapse. The trigger timer is started by stimulus from block 5. Then on each timer event a new data point from the config list is loaded. Block 9 branches to block 6 unless all data points have been loaded (count complete). Then the last data point with a value of 0A is loaded and held for 0.5s. Finally the source is turned off the model branches to idle state.
 
 For operation with UVLO detection, the model is a little more complex:
 
