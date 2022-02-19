@@ -1,4 +1,4 @@
-# Keithley 2450 Arbitrary Current Source
+# Keithley 2450 Arbitrary Current Waveform Player
 
 This is a arbitrary controlled current source for a Keithley 2450 Source Measure Unit (SMU). The features are:
 
