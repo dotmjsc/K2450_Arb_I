@@ -165,7 +165,7 @@ The **Autodelay values** (as found in the Reference Manual) are:
 
   ![](doc/Assure_Error.PNG)
 
-* **Steppy Plot** with this, the current plot in the results will not be interpolated. This helps finding problematic timestep settings where a smooth waveform can't be sourced. See this example:
+* **Steppy Plot** by setting this, the current results will be plotted without interpolation. This helps finding problematic timestep settings where a smooth waveform can't be sourced. See this example:
   ![](doc/Steppy_Plot.png)
 
 * **Load Config** opens a file dialog where you can load a config file. Its a standard .ini file that you can write yourself. Look at default.ini for the key names. Fallback is the  actual config, so a subset is also permitted.
