@@ -6,17 +6,17 @@ This is a arbitrary controlled current source for a Keithley 2450 Source Measure
 
 * Sources current and measures voltage
 
-* The waveform is loaded from a LT-Spice compatible PWL text file, so you can compare your results with your simulation
+* The waveform is loaded from a LT-Spice style PWL text file, so you can compare your measurements with your simulation
 
 * Timing is accurately done by the SMU internally
 
-* Loads trigger model, trigger timer and data points as config list into the SMU
+* Generates the trigger model and trigger timer. Loads the data points as config list into the SMU.
 
-* Undervoltage lockout (UVLO) optionally included into the trigger model
+* Undervoltage lockout (UVLO) optionally included in the trigger model
 
 * Ability to calculate NPLC (number of power line cycles) automatically based on the desired time step
 
-* Full program configuration can be saved and loaded with .ini files
+* All settings can be saved and loaded with .ini files
 
 * Export results to .csv 
 
@@ -26,9 +26,9 @@ This is a arbitrary controlled current source for a Keithley 2450 Source Measure
 
 ![](doc/Example.png)
 
-The example above is using this software to run pulsed load currents on an alkaline battery to compare with simulation results. 
+The example above generates pulsed load currents on an alkaline battery to compare with simulation results of a corresponding model. 
 
-The 4-wire fixture can be bought [here](https://www.aliexpress.com/item/4000606429744.html).
+The 4-wire fixture shown can be bought [here](https://www.aliexpress.com/item/4000606429744.html).
 
 ## How to "Install"
 
@@ -117,13 +117,13 @@ After the PWL file is chosen or reloaded, the plot window shows the PWL waveform
 
 * **Autozero** helps to avoid drifts in long runs. As a penalty the measuring time will get longer. For fast runs with small time steps, disable autozero. The program will manually zero once before the run.
 
-* **Range** sets the current range. Be aware that the different ranges got different Autodelay values (see below). If you choose **Auto**, the best range for the loaded data. If you got small currents but you don't want the high Autodelays, you can either manually set a higher range or a manual delay.
+* **Range** sets the current range. Be aware that the different ranges got different Autodelay values (see below). If you choose **Auto**, the best range will be calculated from PWL data. If you got small currents but you don't want the high Autodelays, you can either manually set a higher range or a manual delay.
 
-* **Autodelay** the SMU will choose a settling delay according to the list below
+* **Autodelay** the SMU will choose a delay according to the list below
 
 * **Manual Delay** if you are unhappy with the Autodelay values, you can set a manual delay here
 
-* **UVLO** (Under Voltage Lock Out) if you enable this, the trigger model will be expanded to include a mechanism that the SMU immediately switches off if the measured voltage drops lower than this setting. This is in particular helpful if you connect a *battery pack* with a protection circuit. In a overcurrent condition, the protection circuit would cut the cells off. In consequence the output voltage of the SMU will go negative (up to the limit setting) and probably destroy something.
+* **UVLO** (Under Voltage Lock Out) if you enable this, the trigger model will be expanded to include a mechanism so that the SMU immediately switches off if the measured voltage drops lower than the UVLO value. This is in particular helpful if you connect a *battery pack* with a protection circuit. In a overcurrent condition, the protection circuit would cut the cells off. In consequence the output voltage of the SMU will go negative (up to the limit setting) and probably destroy something.
 
 * **Limit** the voltage limit setting of the SMU
 
