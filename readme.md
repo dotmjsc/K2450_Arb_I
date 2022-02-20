@@ -123,7 +123,7 @@ After the PWL file is chosen or reloaded, the plot window shows the PWL waveform
 
 * **Manual Delay** if you are unhappy with the Autodelay values, you can set a manual delay here
 
-* **UVLO** (Under Voltage Lock Out) if you enable this, the trigger model will be expanded to include a mechanism so that the SMU immediately switches off if the measured voltage drops lower than the UVLO value. This is in particular helpful if you connect a *battery pack* with a protection circuit. In a overcurrent condition, the protection circuit would cut the cells off. In consequence the output voltage of the SMU will go negative (up to the limit setting) and probably destroy something.
+* **UVLO** (Under Voltage Lock Out) if you enable this, the trigger model will be expanded to include a mechanism so that the SMU immediately switches off if the measured voltage drops lower than the UVLO value. This is in particular helpful if you connect a *battery pack* with a protection circuit. In a overcurrent condition, the protection circuit would cut the cells off. In consequence the output voltage of the SMU would go negative (up to the limit setting) and probably destroy something.
 
 * **Limit** the voltage limit setting of the SMU
 
